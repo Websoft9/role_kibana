@@ -1,0 +1,12 @@
+- name: install the public signing key
+  shell: rpm --import https://artifacts.elastic.co/GPG-KEY-kibana
+
+- set_fact: version_package="{{kibana_meta[kibana_version].yum_name}}" 
+
+- name: Setting kibana repo
+  copy:
+    src: kibana.repo
+    dest: /etc/yum.repos.d/kibana.repo
+
+- name: install kibana
+  shell: sudo yum install kibana-{{kibana_meta[kibana_version].yum_pkg_name_redhat}} -y

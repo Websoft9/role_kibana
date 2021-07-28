@@ -1,0 +1,4 @@
+kibana_version: "7.8"
+kibana_clurname: "my-application"
+kibana_create_index: False
+kibana_port: 5601

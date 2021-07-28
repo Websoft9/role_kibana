@@ -1,0 +1,13 @@
+- name: install the public signing key
+  shell: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+- set_fact: version_package="{{kibana_meta[kibana_version].yum_name}}" 
+
+- name: Setting kibana repo
+  shell: |
+    sudo apt-get install apt-transport-https
+    sudo echo "deb https://artifacts.elastic.co/packages/{{kibana_version}}/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-{{kibana_version}}.list
+ 
+- name: install kibana
+  shell: |
+    sudo apt-get update && sudo apt-get install kibana-{{kibana_meta[kibana_version].yum_pkg_name_debian}} -y
